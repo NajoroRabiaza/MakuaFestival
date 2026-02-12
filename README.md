@@ -19,38 +19,6 @@ Le **MAKUA Festival** est un événement culturel et musical majeur qui se déro
 - Stimuler le tourisme et l'économie locale
 - Favoriser des actions environnementales
 
-## 📁 Structure du Projet
-
-```
-makua-festival/
-├── src/
-│   ├── components/          # Composants React réutilisables
-│   │   ├── VideoBackground.jsx    # Gestion du fond vidéo
-│   │   ├── Header.jsx             # En-tête avec navigation
-│   │   ├── Countdown.jsx          # Affichage du compte à rebours
-│   │   ├── MainContent.jsx        # Contenu principal (titre, CTA)
-│   │   └── MuteButton.jsx         # Bouton contrôle son
-│   │
-│   ├── hooks/               # Custom React hooks
-│   │   └── useCountdown.js        # Hook pour le compte à rebours
-│   │
-│   ├── utils/               # Utilitaires et constantes
-│   │   └── constants.js           # Configuration du festival
-│   │
-│   ├── styles/              # Fichiers CSS
-│   │   └── App.css               # Styles et animations
-│   │
-│   ├── App.jsx              # Composant principal
-│   ├── main.jsx             # Point d'entrée de l'app
-│   └── index.css            # Styles globaux
-│
-├── index.html               # Fichier HTML principal
-├── package.json             # Dépendances du projet
-├── vite.config.js           # Configuration Vite
-├── tailwind.config.js       # Configuration Tailwind
-└── postcss.config.js        # Configuration PostCSS
-```
-
 ## 🚀 Installation et Démarrage
 
 ### 1. Copier le projet
@@ -101,56 +69,6 @@ npm run build
 - Contrôle du son de la vidéo
 - Icône dynamique (muet/son activé)
 
-## 🔧 Personnalisation
-
-### Changer la vidéo de fond
-Modifier dans `src/utils/constants.js`:
-```javascript
-export const VIDEO_CONFIG = {
-  src: 'VOTRE_URL_VIDEO.mp4',
-  type: 'video/mp4'
-};
-```
-
-### Modifier les dates du festival
-Dans `src/utils/constants.js`:
-```javascript
-export const FESTIVAL_CONFIG = {
-  dates: {
-    start: '29 Octobre',           // ← Date de début
-    end: '1 Novembre 2026',        // ← Date de fin
-    target: new Date('2026-10-29T00:00:00').getTime() // ← Date cible pour le compte à rebours
-  }
-};
-```
-
-### Changer la localisation
-Dans `src/utils/constants.js`:
-```javascript
-export const FESTIVAL_CONFIG = {
-  location: {
-    city: 'Toamasina',      // ← Ville
-    region: 'Tamatave',     // ← Région
-    country: 'MADAGASCAR'   // ← Pays
-  }
-};
-```
-
-### Changer le nom du festival
-Dans `src/utils/constants.js`:
-```javascript
-export const FESTIVAL_CONFIG = {
-  name: 'VOTRE_NOM', // Actuellement: MAKUA
-  // ...
-};
-```
-
-### Personnaliser les couleurs
-Les couleurs sont dans les classes Tailwind. Exemple dans `MainContent.jsx`:
-```javascript
-// Bouton gradient
-className="... bg-gradient-to-r from-pink-500 to-purple-600 ..."
-```
 
 ## 📦 Dépendances
 
