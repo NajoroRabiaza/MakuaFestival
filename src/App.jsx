@@ -4,6 +4,7 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import MuteButton from './components/MuteButton';
 // import FestivalInfo from './components/FestivalInfo';
+import Footer from './components/Footer';
 import { useCountdown } from './hooks/useCountdown';
 import { FESTIVAL_CONFIG } from './utils/constants';
 import './styles/App.css';
@@ -21,24 +22,30 @@ function App() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black">
-      {/* Video Background with Overlay */}
-      <VideoBackground videoRef={videoRef} isMuted={isMuted} />
+    <div className="relative bg-black">
+      {/* Hero Section with Video */}
+      <div className="relative w-full h-screen overflow-hidden">
+        {/* Video Background with Overlay */}
+        <VideoBackground videoRef={videoRef} isMuted={isMuted} />
 
-      {/* Content Container */}
-      <div className="relative z-10 flex flex-col h-full">
-        {/* Header */}
-        <Header />
+        {/* Content Container */}
+        <div className="relative z-10 flex flex-col h-full">
+          {/* Header */}
+          <Header />
 
-        {/* Main Content */}
-        <MainContent timeLeft={timeLeft} />
+          {/* Main Content */}
+          <MainContent timeLeft={timeLeft} />
 
-        {/* Festival Info */}
-        {/* <FestivalInfo /> */}
+          {/* Festival Info */}
+          {/* <FestivalInfo /> */}
 
-        {/* Mute Button */}
-        <MuteButton isMuted={isMuted} onToggle={toggleMute} />
+          {/* Mute Button */}
+          <MuteButton isMuted={isMuted} onToggle={toggleMute} />
+        </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
