@@ -4,6 +4,7 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import MuteButton from './components/MuteButton';
 // import FestivalInfo from './components/FestivalInfo';
+import DiscoverSection from './components/DiscoverSection';
 import Footer from './components/Footer';
 import { useCountdown } from './hooks/useCountdown';
 import { FESTIVAL_CONFIG } from './utils/constants';
@@ -43,6 +44,9 @@ function App() {
           <MuteButton isMuted={isMuted} onToggle={toggleMute} />
         </div>
       </div>
+
+      {/* Discover Section */}
+      <DiscoverSection />
 
       {/* Footer */}
       <Footer />
