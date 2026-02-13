@@ -21,7 +21,7 @@ export const FESTIVAL_CONFIG = {
 
 // Video configuration
 export const VIDEO_CONFIG = {
-  // src: '/MAKUA_FESTIVAL.mp4',
+  src: '/MAKUA_FESTIVAL.mp4',
   type: 'video/mp4'
 };
 
