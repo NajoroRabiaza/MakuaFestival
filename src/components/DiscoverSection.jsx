@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const discoverCards = [
   {
@@ -61,6 +63,14 @@ const DiscoverSection = () => {
   const [translateX, setTranslateX] = useState(0);
   const [isClosing, setIsClosing] = useState(false);
   const carouselRef = useRef(null);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Durée de l'animation
+      once: true, // Animation se joue une seule fois
+      easing: 'ease-out',
+    });
+  }, []);
 
   const cardsPerView = 3;
   const maxIndex = discoverCards.length - cardsPerView;
@@ -151,9 +161,10 @@ const DiscoverSection = () => {
   };
 
   return (
-    <section className="relative bg-black py-20 px-6 overflow-hidden">
+    <section className="relative bg-black py-20 px-6 overflow-hidden" data-aos="fade-up"
+    data-aos-delay="800">
       {/* Title */}
-      <div className="max-w-7xl mx-auto mb-4 text-center">
+      <div className="max-w-7xl mx-auto mb-4 text-center ">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
           Découvrir MAKUA
         </h2>
