@@ -199,7 +199,7 @@ const DiscoverSection = () => {
                       hoveredCard === card.id ? 'opacity-100' : 'opacity-0'
                     }`}
                     style={{
-                      background: 'linear-gradient(135deg, rgba(220, 220, 220, 0.35), rgba(200, 200, 200, 0.2), rgba(220, 220, 220, 0.35))',
+                      background: 'linear-gradient(135deg, rgba(255, 80, 40, 0.35), rgba(255, 140, 50, 0.25), rgba(255, 80, 40, 0.35))',
                       filter: 'blur(8px)',
                       zIndex: 0
                     }}
