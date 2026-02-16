@@ -5,6 +5,7 @@ import MainContent from './components/MainContent';
 import MuteButton from './components/MuteButton';
 // import FestivalInfo from './components/FestivalInfo';
 import DiscoverSection from './components/DiscoverSection';
+import LineupSection from './components/LineupSection';
 import Footer from './components/Footer';
 import { useCountdown } from './hooks/useCountdown';
 import { FESTIVAL_CONFIG } from './utils/constants';
@@ -47,7 +48,7 @@ function App() {
 
       {/* Discover Section */}
       <DiscoverSection />
-
+      <LineupSection />
       {/* Footer */}
       <Footer />
     </div>
