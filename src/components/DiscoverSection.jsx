@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -66,8 +67,8 @@ const DiscoverSection = () => {
 
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Durée de l'animation
-      once: true, // Animation se joue une seule fois
+      duration: 1000,
+      once: true,
       easing: 'ease-out',
     });
   }, []);
@@ -75,14 +76,10 @@ const DiscoverSection = () => {
   const cardsPerView = 3;
   const maxIndex = discoverCards.length - cardsPerView;
 
-  // Wheel handler for trackpad gestures
-    const handleWheel = (e) => {
-    // Détecte le défilement horizontal sur trackpad
+  const handleWheel = (e) => {
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
       e.preventDefault();
       
-      // deltaX > 0 = swipe vers la gauche (next slide)
-      // deltaX < 0 = swipe vers la droite (prev slide)
       if (e.deltaX > 30) {
         nextSlide();
       } else if (e.deltaX < -30) {
@@ -111,10 +108,9 @@ const DiscoverSection = () => {
       setSelectedCard(null);
       setIsClosing(false);
       document.body.style.overflow = 'unset';
-    }, 100);
+    }, 300);
   };
 
-  // Mouse drag handlers
   const handleMouseDown = (e) => {
     setIsDragging(true);
     setStartX(e.pageX - carouselRef.current.offsetLeft);
@@ -141,7 +137,6 @@ const DiscoverSection = () => {
     setTranslateX(0);
   };
 
-  // Touch handlers for trackpad/mobile
   const handleTouchStart = (e) => {
     setStartX(e.touches[0].clientX);
   };
@@ -161,10 +156,9 @@ const DiscoverSection = () => {
   };
 
   return (
-    <section className="relative bg-black py-20 px-6 overflow-hidden" data-aos="fade-up"
-    data-aos-delay="800">
+    <section className="relative bg-black py-20 px-6 overflow-hidden" data-aos="fade-up" data-aos-delay="800">
       {/* Title */}
-      <div className="max-w-7xl mx-auto mb-4 text-center ">
+      <div className="max-w-7xl mx-auto mb-4 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
           Découvrir MAKUA
         </h2>
@@ -202,9 +196,7 @@ const DiscoverSection = () => {
                 onMouseEnter={() => setHoveredCard(card.id)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                {/* Wrapper pour l'effet de glow externe */}
                 <div className="relative">
-                  {/* Bordure lumineuse externe floue (SUBTIL) */}
                   <div 
                     className={`absolute -inset-1.5 rounded-3xl transition-all duration-700 ${
                       hoveredCard === card.id ? 'opacity-100' : 'opacity-0'
@@ -216,9 +208,7 @@ const DiscoverSection = () => {
                     }}
                   />
                   
-                  {/* Carte principale */}
                   <div className="relative group cursor-pointer h-[400px] rounded-3xl overflow-hidden z-10">
-                    {/* Image */}
                     <img 
                       src={card.image} 
                       alt={card.title}
@@ -226,10 +216,8 @@ const DiscoverSection = () => {
                       draggable="false"
                     />
                     
-                    {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                     
-                    {/* Bordure lumineuse interne SUBTILE */}
                     <div 
                       className="absolute inset-0 rounded-3xl transition-all duration-700 pointer-events-none"
                       style={{
@@ -239,7 +227,6 @@ const DiscoverSection = () => {
                       }}
                     />
                     
-                    {/* Content */}
                     <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                       <h3 className="text-2xl font-bold text-white mb-2 leading-tight">
                         {card.title}
@@ -249,7 +236,6 @@ const DiscoverSection = () => {
                       </p>
                     </div>
 
-                    {/* Hover Button */}
                     <div 
                       className={`absolute bottom-0 left-0 right-0 flex justify-center pb-6 transition-all duration-500 z-20 ${
                         hoveredCard === card.id 
@@ -298,25 +284,22 @@ const DiscoverSection = () => {
         </button>
       </div>
 
-      {/* Modal avec Animation d'ouverture ET de fermeture */}
-      {selectedCard && (
+      {/* Modal avec createPortal */}
+      {selectedCard && createPortal(
         <div 
-          className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${
+          className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 ${
             isClosing ? 'animate-modal-backdrop-out' : 'animate-modal-backdrop'
           }`}
           onClick={closeModal}
         >
-          {/* Backdrop sans blur */}
           <div className="absolute inset-0 bg-black/60" />
           
-          {/* Modal Content avec Animation */}
           <div 
             className={`relative bg-gradient-to-br from-gray-900 to-black border border-white/20 rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-hidden shadow-2xl ${
               isClosing ? 'animate-modal-content-out' : 'animate-modal-content'
             }`}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               onClick={closeModal}
               className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all z-10 border border-white/20"
@@ -325,7 +308,6 @@ const DiscoverSection = () => {
               <X className="w-5 h-5 text-white" />
             </button>
 
-            {/* Modal Image */}
             <div className="relative h-72 overflow-hidden">
               <img 
                 src={selectedCard.image} 
@@ -335,7 +317,6 @@ const DiscoverSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
             </div>
 
-            {/* Modal Text Content */}
             <div className="p-8 md:p-10 overflow-y-auto max-h-[calc(85vh-288px)]">
               <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
                 {selectedCard.title}
@@ -348,29 +329,20 @@ const DiscoverSection = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
-      {/* Animations CSS - Ouverture ET Fermeture */}
+      {/* Animations CSS */}
       <style jsx>{`
         @keyframes modal-backdrop-in {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
-
         @keyframes modal-backdrop-out {
-          from {
-            opacity: 1;
-          }
-          to {
-            opacity: 0;
-          }
+          from { opacity: 1; }
+          to { opacity: 0; }
         }
-
         @keyframes modal-content-in {
           from {
             opacity: 0;
@@ -381,7 +353,6 @@ const DiscoverSection = () => {
             transform: scale(1) translateY(0);
           }
         }
-
         @keyframes modal-content-out {
           from {
             opacity: 1;
@@ -392,19 +363,15 @@ const DiscoverSection = () => {
             transform: scale(0.95) translateY(20px);
           }
         }
-
         .animate-modal-backdrop {
           animation: modal-backdrop-in 0.3s ease-out;
         }
-
         .animate-modal-backdrop-out {
           animation: modal-backdrop-out 0.3s ease-out;
         }
-
         .animate-modal-content {
           animation: modal-content-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .animate-modal-content-out {
           animation: modal-content-out 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
