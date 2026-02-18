@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FESTIVAL_CONFIG } from '../utils/constants';
 import Countdown from './Countdown';
 
@@ -17,9 +18,11 @@ const MainContent = ({ timeLeft }) => {
 
       {/* CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 mb-16 w-full max-w-md animate-slide-up">
-      <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 text-white font-bold text-lg uppercase tracking-wide hover:scale-105 transition-transform shadow-2xl shadow-orange-300/60">
-        Get Your Tickets
-      </button>
+        <Link to="/billetterie" className="w-full">
+          <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 text-white font-bold text-lg uppercase tracking-wide hover:scale-105 transition-transform shadow-2xl shadow-orange-300/60">
+            Get Your Tickets
+          </button>
+        </Link>
         <button className="w-full px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-bold text-lg uppercase tracking-wide hover:bg-white hover:text-black transition-all">
           Get Your Accommodation
         </button>

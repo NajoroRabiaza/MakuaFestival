@@ -2,17 +2,20 @@ import React from 'react';
 import { Menu, ShoppingBag } from 'lucide-react';
 import { FESTIVAL_CONFIG } from '../utils/constants';
 import makuaLogo from '../assets/makua-logo.jpeg';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <header className="flex items-center justify-between px-6 py-6 md:px-12 md:py-6">
       {/* Logo */}
       <div className="flex items-center">
-        <img 
-          src={makuaLogo} 
-          alt="MAKUA Festival" 
-          className="h-16 md:h-20 lg:h-28 w-auto object-contain"
-        />
+        <Link to="/" className="block hover:opacity-90 transition-opacity">
+          <img 
+            src={makuaLogo} 
+            alt="MAKUA Festival" 
+            className="h-16 md:h-20 lg:h-28 w-auto object-contain cursor-pointer"
+          />
+        </Link>
       </div>
 
       {/* Center Menu Button */}
