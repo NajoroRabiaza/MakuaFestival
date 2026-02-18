@@ -8,7 +8,7 @@ const MainContent = ({ timeLeft }) => {
     <div className="flex-1 flex flex-col items-center justify-center px-6">
       {/* Date */}
       <div className="text-center mb-8 animate-fade-in">
-        <h2 className="text-5xl md:text-7xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+        <h2 className="text-5xl md:text-7xl lg:text-7xl font-bold text-white mb-4 tracking-tight">
           {FESTIVAL_CONFIG.dates.start} - {FESTIVAL_CONFIG.dates.end}
         </h2>
         <p className="text-xl md:text-2xl text-white/90 font-light tracking-wide">
@@ -19,7 +19,7 @@ const MainContent = ({ timeLeft }) => {
       {/* CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 mb-16 w-full max-w-md animate-slide-up">
         <Link to="/billetterie" className="w-full">
-          <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 text-white font-bold text-lg uppercase tracking-wide hover:scale-105 transition-transform shadow-2xl shadow-orange-300/60">
+          <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 text-white font-bold text-lg uppercase tracking-wide hover:scale-105 transition-transform shadow-2xl shadow-orange-300/40">
             Get Your Tickets
           </button>
         </Link>
