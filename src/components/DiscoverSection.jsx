@@ -156,7 +156,7 @@ const DiscoverSection = () => {
   };
 
   return (
-    <section className="relative bg-black py-20 px-6 overflow-hidden" data-aos="fade-up" data-aos-delay="800">
+    <section id="discover" className="relative bg-black py-20 px-6 overflow-hidden" data-aos="fade-up" data-aos-delay="800">
       {/* Title */}
       <div className="max-w-7xl mx-auto mb-4 text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">

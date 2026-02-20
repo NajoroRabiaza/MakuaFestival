@@ -151,7 +151,7 @@ const LineupSection = () => {
   const displayedArtists = showAll ? artists : artists.slice(0, 10);
 
   return (
-    <section className="relative bg-black py-20 px-6" data-aos="fade-up" data-aos-delay="200">
+    <section id="lineup" className="relative bg-black py-20 px-6" data-aos="fade-up" data-aos-delay="200">
       {/* Title */}
       <div className="max-w-7xl mx-auto mb-12">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">

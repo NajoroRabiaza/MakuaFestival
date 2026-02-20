@@ -113,7 +113,7 @@ const BilletteriePage = () => {
       <Header />
 
       {/* Sales Points Section - EN PREMIER */}
-      <section className="relative bg-black py-2 px-6" data-aos="fade-up" data-aos-delay="200">
+      <section className="relative bg-black py-20 px-6" data-aos="fade-up" data-aos-delay="200">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-7 mb-4 text-center">
             Points de Vente
@@ -157,7 +157,7 @@ const BilletteriePage = () => {
 
       <div className="relative bg-gradient-to-b from-black via-gray-900 to-black">
         {/* Hero Section */}
-        <div className="max-w-7xl mx-auto px-6 pt-20 text-center" data-aos="fade-up">
+        <div className="max-w-7xl mx-auto px-6  text-center" data-aos="fade-up">
           <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto leading-relaxed">
             Choisissez votre pass et vivez une expérience inoubliable au MAKUA Festival 2026. 
             Trois formules adaptées à tous les budgets pour profiter du meilleur de la musique malgache.
@@ -166,22 +166,24 @@ const BilletteriePage = () => {
       </div>
 
       {/* Passes Section - EN DEUXIÈME */}
-      <section className="relative bg-gradient-to-b from-black via-gray-900 to-black pb-5 px-6" data-aos="fade-up">
+      <section className="relative bg-gradient-to-b from-black via-gray-900 to-black pb-5 px-6" data-aos="fade-zoom-in">
         <div className="max-w-7xl mx-auto">
-          <p className="text-lg text-white/60 mb-16 text-center">
+          <p className="text-lg text-white/60 mb-20 text-center">
             3 jours de festival, des souvenirs pour la vie
           </p>
 
           {/* Pass Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-15 mb-20">
             {passes.map((pass, index) => (
               <div
                 key={pass.id}
                 className="relative"
                 onMouseEnter={() => setHoveredPass(pass.id)}
                 onMouseLeave={() => setHoveredPass(null)}
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
+                data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="1000"
+                data-aos-offset="0"
               >
                 {/* Popular Badge */}
                 {pass.popular && (
@@ -263,8 +265,10 @@ const BilletteriePage = () => {
               <div
                 key={index}
                 className="group relative"
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
+                data-aos="fade-zoom-in"
+                data-aos-easing="ease-in-back"
+                data-aos-delay="1000"
+                data-aos-offset="0"
               >
                 <div 
                   className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500"

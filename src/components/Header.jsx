@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, ShoppingBag } from 'lucide-react';
 import { FESTIVAL_CONFIG } from '../utils/constants';
@@ -31,8 +31,23 @@ const menuItems = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Détection du scroll pour changer le style du header
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleMenuItemClick = (item, e) => {
     e.preventDefault();
@@ -72,31 +87,39 @@ const Header = () => {
   };
 
   return (
-    <header className="flex items-center justify-between px-6 py-6 md:px-12 md:py-6 relative z-50">
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-12 md:py-5 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-black/60 backdrop-blur-xl border-b border-white/10 shadow-lg' 
+          : 'bg-transparent'
+      }`}
+    >
       {/* Logo */}
-      <Link to="/" className="flex items-center">
+      <Link to="/" className="flex items-center transition-transform hover:scale-105">
         <img 
           src={makuaLogo} 
           alt="MAKUA Festival" 
-          className="h-16 md:h-20 lg:h-28 w-auto object-contain"
+          className={`w-auto object-contain transition-all duration-300 ${
+            isScrolled ? 'h-12 md:h-16' : 'h-16 md:h-20 lg:h-24'
+          }`}
         />
       </Link>
 
-      {/* Center Menu Button with Dropdown*/}
+      {/* Center Menu Button with Dropdown - Style Tomorrowland */}
       <div 
         className="absolute left-1/2 -translate-x-1/2"
         onMouseEnter={() => setIsMenuOpen(true)}
         onMouseLeave={() => setIsMenuOpen(false)}
       >
-        <button className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/10 transition-all">
+        <button className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all">
           <Menu className="w-5 h-5 text-white" />
         </button>
 
-        {/* Dropdown Menu Horizontal */}
+        {/* Dropdown Menu Horizontal - Style Tomorrowland */}
         {isMenuOpen && (
           <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 animate-menu-fade-in">
             {/* Menu content horizontal */}
-            <div className="relative bg-black/40 backdrop-blur-md border-t border-white/10 px-8 py-4 rounded-sm">
+            <div className="relative bg-black/60 backdrop-blur-xl border-t border-white/10 px-8 py-4 rounded-sm shadow-2xl">
               <div className="flex items-center gap-12">
                 {menuItems.map((item, index) => (
                   <a
@@ -105,11 +128,11 @@ const Header = () => {
                     onClick={(e) => handleMenuItemClick(item, e)}
                     className="group relative py-2 transition-all duration-300 cursor-pointer whitespace-nowrap"
                   >
-                    <span className="text-white/100 group-hover:text-white font-medium text-s uppercase tracking-wider transition-colors">
+                    <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase tracking-wider transition-colors">
                       {item.label}
                     </span>
                     
-                    {/* Underline on hover*/}
+                    {/* Underline on hover - Style Tomorrowland */}
                     <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                   </a>
                 ))}
