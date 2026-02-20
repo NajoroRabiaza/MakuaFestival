@@ -113,7 +113,7 @@ const BilletteriePage = () => {
       <Header />
 
       {/* Sales Points Section - EN PREMIER */}
-      <section className="relative bg-black py-20 px-6" data-aos="fade-up" data-aos-delay="200">
+      <section className="relative bg-black pt-36 pb-20 px-6" data-aos="fade-up" data-aos-delay="200">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-7 mb-4 text-center">
             Points de Vente
@@ -168,7 +168,7 @@ const BilletteriePage = () => {
       {/* Passes Section - EN DEUXIÈME */}
       <section className="relative bg-gradient-to-b from-black via-gray-900 to-black pb-5 px-6" data-aos="fade-zoom-in">
         <div className="max-w-7xl mx-auto">
-          <p className="text-lg text-white/60 mb-20 text-center">
+          <p className="text-lg text-white/60 mb-36 text-center">
             3 jours de festival, des souvenirs pour la vie
           </p>
 
