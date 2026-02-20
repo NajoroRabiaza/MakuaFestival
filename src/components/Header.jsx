@@ -26,6 +26,11 @@ const menuItems = [
     label: 'BILLETTERIE',
     path: '/billetterie',
     type: 'page'
+  },
+  {
+    label: 'HÉBERGEMENT',
+    path: '/hebergement',
+    type: 'page'
   }
 ];
 

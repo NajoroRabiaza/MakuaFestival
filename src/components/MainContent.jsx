@@ -23,9 +23,13 @@ const MainContent = ({ timeLeft }) => {
             Get Your Tickets
           </button>
         </Link>
-        <button className="w-full px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-bold text-lg uppercase tracking-wide hover:bg-white hover:text-black transition-all">
-          Get Your Accommodation
-        </button>
+        
+        {/* AJOUT DU LINK ICI 👇 */}
+        <Link to="/hebergement" className="w-full">
+          <button className="w-full px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-bold text-lg uppercase tracking-wide hover:bg-white hover:text-black transition-all">
+            Get Your Accommodation
+          </button>
+        </Link>
       </div>
 
       {/* Countdown */}
