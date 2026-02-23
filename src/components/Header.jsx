@@ -110,7 +110,7 @@ const Header = () => {
         />
       </Link>
 
-      {/* Center Menu Button with Dropdown - Style Tomorrowland */}
+      {/* Center Menu Button with Dropdown */}
       <div 
         className="absolute left-1/2 -translate-x-1/2"
         onMouseEnter={() => setIsMenuOpen(true)}
@@ -120,7 +120,7 @@ const Header = () => {
           <Menu className="w-5 h-5 text-white" />
         </button>
 
-        {/* Dropdown Menu Horizontal - Style Tomorrowland */}
+        {/* Dropdown Menu Horizontal*/}
         {isMenuOpen && (
           <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 animate-menu-fade-in">
             {/* Menu content horizontal */}
@@ -137,7 +137,7 @@ const Header = () => {
                       {item.label}
                     </span>
                     
-                    {/* Underline on hover - Style Tomorrowland */}
+                    {/* Underline on hover*/}
                     <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                   </a>
                 ))}
