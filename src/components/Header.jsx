@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, ShoppingBag } from 'lucide-react';
+import { Menu, ShoppingBag, ChevronDown, ChevronUp } from 'lucide-react';
 import { FESTIVAL_CONFIG } from '../utils/constants';
 import makuaLogo from '../assets/makua-logo.jpeg';
 
@@ -8,19 +8,28 @@ const menuItems = [
   {
     label: 'ACCUEIL',
     path: '/',
-    type: 'page'
-  },
-  {
-    label: 'DÉCOUVRIR',
-    path: '/',
-    sectionId: 'discover',
-    type: 'section'
-  },
-  {
-    label: 'ARTISTS',
-    path: '/',
-    sectionId: 'lineup',
-    type: 'section'
+    type: 'page',
+    hasSubmenu: true,
+    submenu: [
+      {
+        label: 'Découvrir',
+        path: '/',
+        sectionId: 'discover',
+        type: 'section'
+      },
+      {
+        label: 'Artists',
+        path: '/',
+        sectionId: 'lineup',
+        type: 'section'
+      },
+      {
+        label: 'Programme',
+        path: '/',
+        sectionId: 'schedule',
+        type: 'section'
+      }
+    ]
   },
   {
     label: 'BILLETTERIE',
@@ -36,6 +45,7 @@ const menuItems = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,7 +66,20 @@ const Header = () => {
 
   const handleMenuItemClick = (item, e) => {
     e.preventDefault();
+    
+    // Si l'item a un submenu, toggle le submenu
+    if (item.hasSubmenu) {
+      if (openSubmenu === item.label) {
+        setOpenSubmenu(null);
+      } else {
+        setOpenSubmenu(item.label);
+      }
+      return;
+    }
+
+    // Sinon, navigation normale
     setIsMenuOpen(false);
+    setOpenSubmenu(null);
 
     if (item.type === 'section') {
       // Si on est déjà sur la homepage
@@ -114,32 +137,78 @@ const Header = () => {
       <div 
         className="absolute left-1/2 -translate-x-1/2"
         onMouseEnter={() => setIsMenuOpen(true)}
-        onMouseLeave={() => setIsMenuOpen(false)}
+        onMouseLeave={() => {
+          setIsMenuOpen(false);
+          setOpenSubmenu(null);
+        }}
       >
         <button className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all">
           <Menu className="w-5 h-5 text-white" />
         </button>
 
-        {/* Dropdown Menu Horizontal*/}
+        {/* Dropdown Menu Horizontal */}
         {isMenuOpen && (
           <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 animate-menu-fade-in">
             {/* Menu content horizontal */}
             <div className="relative bg-black/60 backdrop-blur-xl border-t border-white/10 px-8 py-4 rounded-sm shadow-2xl">
               <div className="flex items-center gap-12">
                 {menuItems.map((item, index) => (
-                  <a
+                  <div
                     key={index}
-                    href={item.type === 'page' ? item.path : `#${item.sectionId}`}
-                    onClick={(e) => handleMenuItemClick(item, e)}
-                    className="group relative py-2 transition-all duration-300 cursor-pointer whitespace-nowrap"
+                    className="relative"
+                    onMouseEnter={() => item.hasSubmenu && setOpenSubmenu(item.label)}
+                    onMouseLeave={() => item.hasSubmenu && setOpenSubmenu(null)}
                   >
-                    <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase tracking-wider transition-colors">
-                      {item.label}
-                    </span>
-                    
-                    {/* Underline on hover*/}
-                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-                  </a>
+                    <a
+                      href={item.path}
+                      onClick={(e) => handleMenuItemClick(item, e)}
+                      className="group relative py-2 transition-all duration-300 cursor-pointer whitespace-nowrap flex items-center gap-2"
+                    >
+                      <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase tracking-wider transition-colors">
+                        {item.label}
+                      </span>
+                      
+                      {/* Chevron pour items avec submenu */}
+                      {item.hasSubmenu && (
+                        openSubmenu === item.label ? (
+                          <ChevronUp className="w-3.5 h-3.5 text-white/90 group-hover:text-white transition-colors" />
+                        ) : (
+                          <ChevronDown className="w-3.5 h-3.5 text-white/90 group-hover:text-white transition-colors" />
+                        )
+                      )}
+                      
+                      {/* Underline on hover */}
+                      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                    </a>
+
+                    {/* Submenu HORIZONTAL avec zone de hover étendue */}
+                    {item.hasSubmenu && openSubmenu === item.label && (
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 animate-submenu-fade-in">
+                        {/* Zone invisible pour garder le hover actif */}
+                        <div className="absolute -top-6 left-0 right-0 h-6" />
+                        
+                        <div className="bg-black/80 backdrop-blur-xl border border-white/10 rounded-lg overflow-hidden shadow-2xl px-6 py-4">
+                          <div className="flex items-center gap-12">
+                            {item.submenu.map((subItem, subIndex) => (
+                              <a
+                                key={subIndex}
+                                href={subItem.path}
+                                onClick={(e) => handleMenuItemClick(subItem, e)}
+                                className="group relative py-2 transition-all duration-300 cursor-pointer whitespace-nowrap"
+                              >
+                                <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase tracking-wider transition-colors">
+                                  {subItem.label}
+                                </span>
+                                
+                                {/* Underline on hover - MÊME STYLE que items principaux */}
+                                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -186,8 +255,23 @@ const Header = () => {
           }
         }
 
+        @keyframes submenu-fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         .animate-menu-fade-in {
           animation: menu-fade-in 0.2s ease-out;
+        }
+
+        .animate-submenu-fade-in {
+          animation: submenu-fade-in 0.2s ease-out;
         }
       `}</style>
     </header>

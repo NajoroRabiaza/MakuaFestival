@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, ChevronRight, MapPin } from 'lucide-react';
 
-// Couleur bordeaux
+// Couleur bordeaux - MODIFIÉ POUR STYLE TOMORROWLAND
 const TML_COLOR = 'linear-gradient(135deg, #8B1A4A 0%, #C0255F 100%)';
 const TML_BG = '#0e0608';
-const TML_CARD_BG = '#160a0d';
-const TML_BORDER = 'rgba(139,26,74,0.35)';
+const TML_CARD_BG = '#FFFFFF'; // BLANC au lieu de noir
+const TML_BORDER = 'rgba(139,26,74,0.2)'; // Bordure plus subtile
 
 // ─── Données du programme ────────────────────────────────────────────────────
 
@@ -227,7 +227,7 @@ const ScheduleModal = ({ day, onClose }) => {
           </button>
         </div>
 
-        {/* style de Colonnes */}
+        {/* Colonnes - FOND BLANC */}
         <div className="p-6 md:p-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {day.stages.map((stage, si) => (
@@ -257,7 +257,7 @@ const ScheduleModal = ({ day, onClose }) => {
                   )}
                 </div>
 
-                {/* Liste artistes — noms centrés, espacés, style TML */}
+                {/* Liste artistes — TEXTE NOIR sur fond blanc */}
                 <div className="flex flex-col">
                   {stage.artists.map((artist, ai) => (
                     <div
@@ -265,7 +265,7 @@ const ScheduleModal = ({ day, onClose }) => {
                       className="px-4 py-3.5 text-center"
                       style={{
                         borderBottom: ai < stage.artists.length - 1
-                          ? '1px solid rgba(139,26,74,0.2)'
+                          ? '1px solid rgba(139,26,74,0.15)'
                           : 'none',
                       }}
                     >
@@ -273,15 +273,15 @@ const ScheduleModal = ({ day, onClose }) => {
                         className="text-sm font-medium tracking-wide"
                         style={{
                           color: artist.name.includes('More to be') || artist.name.includes('???')
-                            ? 'rgba(255,255,255,0.4)'
-                            : 'rgba(255,255,255,0.92)',
+                            ? 'rgba(0,0,0,0.35)'
+                            : 'rgba(0,0,0,0.85)', // TEXTE NOIR
                           fontStyle: artist.name.includes('More to be') ? 'italic' : 'normal',
                         }}
                       >
                         {artist.name}
                       </p>
                       {artist.note && (
-                        <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                        <p className="text-xs mt-0.5" style={{ color: 'rgba(0,0,0,0.4)' }}>
                           {artist.note}
                         </p>
                       )}
@@ -321,19 +321,19 @@ const ScheduleSection = () => {
   const [activeDay, setActiveDay] = useState(null);
 
   return (
-    <section style={{ backgroundColor: TML_BG }} className="py-24 px-6">
+    <section id="schedule" style={{ backgroundColor: TML_BG }} className="py-24 px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* En-tête */}
         <div className="mb-12">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">Au programme</h2>
-          <p className="text-base max-w-lg leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+          <p className="text-base max-w-lg leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
             4 jours de festival sur l'Avenue de l'Indépendance.<br />
             Cliquez sur un jour pour voir le programme complet.
           </p>
         </div>
 
-        {/* 4 cartes de jours — style TML */}
+        {/* 4 cartes de jours — FOND BLANC STYLE TOMORROWLAND */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {days.map((day) => (
             <button
@@ -362,11 +362,11 @@ const ScheduleSection = () => {
                 <p className="text-white/65 text-xs uppercase tracking-wider">{day.theme}</p>
               </div>
 
-              {/* Corps carte */}
+              {/* Corps carte - FOND BLANC + TEXTE NOIR */}
               <div className="px-5 py-5">
                 <p
                   className="text-xs uppercase tracking-[0.2em] mb-3 font-medium"
-                  style={{ color: 'rgba(255,255,255,0.3)' }}
+                  style={{ color: 'rgba(0,0,0,0.4)' }}
                 >
                   Têtes d'affiche
                 </p>
@@ -375,7 +375,7 @@ const ScheduleSection = () => {
                     <li
                       key={i}
                       className="text-sm font-medium text-center"
-                      style={{ color: 'rgba(255,255,255,0.8)' }}
+                      style={{ color: 'rgba(0,0,0,0.8)' }} // TEXTE NOIR
                     >
                       {name}
                     </li>
@@ -386,15 +386,15 @@ const ScheduleSection = () => {
                 <div
                   className="flex items-center justify-center gap-2 pt-4 text-xs font-medium transition-colors"
                   style={{
-                    borderTop: '1px solid rgba(139,26,74,0.3)',
-                    color: 'rgba(255,255,255,0.35)',
+                    borderTop: '1px solid rgba(139,26,74,0.2)',
+                    color: 'rgba(139,26,74,0.6)', // Bordeaux foncé
                   }}
                 >
-                  <span className="group-hover:text-white/70 transition-colors">
+                  <span className="group-hover:text-[#8B1A4A] transition-colors">
                     Programme complet
                   </span>
                   <ChevronRight
-                    className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 group-hover:text-white/70"
+                    className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 group-hover:text-[#8B1A4A]"
                   />
                 </div>
               </div>
@@ -405,7 +405,7 @@ const ScheduleSection = () => {
         {/* Mention lieu */}
         <div
           className="flex items-center gap-2 mt-8 text-xs"
-          style={{ color: 'rgba(255,255,255,0.2)' }}
+          style={{ color: 'rgba(255,255,255,1)' }}
         >
           <MapPin className="w-3.5 h-3.5" />
           Avenue de l'Indépendance, Toamasina — Entrée à partir de 12h chaque jour
