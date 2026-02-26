@@ -115,7 +115,7 @@ const BilletteriePage = () => {
       {/* Sales Points Section - EN PREMIER */}
       <section className="relative bg-black pt-36 pb-20 px-6" data-aos="fade-up" data-aos-delay="200">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-7 mb-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mt-10 mb-4 text-center">
             Points de Vente
           </h2>
           <p className="text-lg text-white/60 mb-12 text-center">

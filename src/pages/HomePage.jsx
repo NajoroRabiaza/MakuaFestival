@@ -5,6 +5,7 @@ import MainContent from '../components/MainContent';
 import MuteButton from '../components/MuteButton';
 import DiscoverSection from '../components/DiscoverSection';
 import LineupSection from '../components/LineupSection';
+import ScheduleSection from '../components/ScheduleSection';
 import Footer from '../components/Footer';
 import { useCountdown } from '../hooks/useCountdown';
 import { FESTIVAL_CONFIG } from '../utils/constants';
@@ -43,10 +44,13 @@ const HomePage = () => {
 
       {/* Discover Section */}
       <DiscoverSection />
-      
+
       {/* Lineup Section */}
       <LineupSection />
-      
+
+      {/* Schedule Section */}
+      <ScheduleSection />
+
       {/* Footer */}
       <Footer />
     </div>

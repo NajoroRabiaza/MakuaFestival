@@ -155,7 +155,7 @@ const LineupSection = () => {
       {/* Title */}
       <div className="max-w-7xl mx-auto mb-12">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
-          Artists
+          Les artistes
         </h2>
       </div>
 

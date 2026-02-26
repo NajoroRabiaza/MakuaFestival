@@ -7,7 +7,7 @@ const MainContent = ({ timeLeft }) => {
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-6">
       {/* Date */}
-      <div className="text-center mb-8 animate-fade-in">
+      <div className="text-center mt-12 animate-fade-in">
         <h2 className="text-5xl md:text-7xl lg:text-7xl font-bold text-white mb-4 tracking-tight">
           {FESTIVAL_CONFIG.dates.start} - {FESTIVAL_CONFIG.dates.end}
         </h2>
@@ -17,14 +17,14 @@ const MainContent = ({ timeLeft }) => {
       </div>
 
       {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-16 w-full max-w-md animate-slide-up">
+      <div className="flex flex-col sm:flex-row gap-4 m-10 w-full max-w-md animate-slide-up">
         <Link to="/billetterie" className="w-full">
-          <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 text-white font-bold text-lg uppercase tracking-wide hover:scale-105 transition-transform shadow-2xl shadow-orange-300/40">
+          <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 text-white font-bold text-lg uppercase tracking-wide hover:scale-105 transition-transform shadow-2xl shadow-orange-400/40">
             Get Your Tickets
           </button>
         </Link>
         
-        {/* AJOUT DU LINK ICI 👇 */}
+        {/* AJOUT DU LINK ICI */}
         <Link to="/hebergement" className="w-full">
           <button className="w-full px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-bold text-lg uppercase tracking-wide hover:bg-white hover:text-black transition-all">
             Get Your Accommodation
