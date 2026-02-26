@@ -148,7 +148,7 @@ const Header = () => {
 
         {/* Dropdown Menu Horizontal */}
         {isMenuOpen && (
-          <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 animate-menu-fade-in">
+          <div className="absolute top-full left-1/2 -translate-x-1/2 animate-menu-fade-in">
             {/* Menu content horizontal */}
             <div className="relative bg-black/60 backdrop-blur-xl border-t border-white/10 px-8 py-4 rounded-sm shadow-2xl">
               <div className="flex items-center gap-12">
@@ -183,11 +183,11 @@ const Header = () => {
 
                     {/* Submenu HORIZONTAL avec zone de hover étendue */}
                     {item.hasSubmenu && openSubmenu === item.label && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 animate-submenu-fade-in">
+                      <div className="absolute left-1/2 -translate-x-1/2 animate-submenu-fade-in">
                         {/* Zone invisible pour garder le hover actif */}
-                        <div className="absolute -top-6 left-0 right-0 h-6" />
+                        <div className="absolute left-0 right-0 h-6" />
                         
-                        <div className="bg-black/80 backdrop-blur-xl border border-white/10 rounded-lg overflow-hidden shadow-2xl px-6 py-4">
+                        <div className="bg-black/80 backdrop-blur-xl border border-white/10 rounded-lg overflow-hidden shadow-2xl px-6 py-2">
                           <div className="flex items-center gap-12">
                             {item.submenu.map((subItem, subIndex) => (
                               <a
@@ -196,7 +196,7 @@ const Header = () => {
                                 onClick={(e) => handleMenuItemClick(subItem, e)}
                                 className="group relative py-2 transition-all duration-300 cursor-pointer whitespace-nowrap"
                               >
-                                <span className="text-white/90 group-hover:text-white font-medium text-sm uppercase tracking-wider transition-colors">
+                                <span className="text-white group-hover:text-white font-medium text-sm uppercase tracking-wider transition-colors">
                                   {subItem.label}
                                 </span>
                                 

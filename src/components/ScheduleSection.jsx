@@ -408,7 +408,7 @@ const ScheduleSection = () => {
           style={{ color: 'rgba(255,255,255,1)' }}
         >
           <MapPin className="w-3.5 h-3.5" />
-          Avenue de l'Indépendance, Toamasina — Entrée à partir de 12h chaque jour
+          Avenue de l'Indépendance, Toamasina — Entrée à partir de 8h chaque jour
         </div>
       </div>
 
