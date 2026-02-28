@@ -218,13 +218,6 @@ const Header = () => {
 
       {/* Right Side */}
       <div className="flex items-center gap-3 md:gap-4">
-        {/* Language Selector */}
-        <button className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all">
-          <span className="text-white text-sm font-medium">FR</span>
-          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
 
         {/* Shopping Bag */}
         <button className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all">
