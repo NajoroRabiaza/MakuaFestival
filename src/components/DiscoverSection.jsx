@@ -9,7 +9,7 @@ const discoverCards = [
     id: 1,
     title: "Culture Malgache",
     subtitle: "L'âme de l'Est",
-    image: "https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800",
+    image: "/image/culture.jpeg",
     description: "Découvrez la richesse de la culture malgache à travers le MAKUA Festival. Musique traditionnelle, danses ancestrales et chants locaux se mêlent aux rythmes modernes pour créer une expérience unique.",
     fullContent: "Le MAKUA Festival est une célébration vivante de la culture de la région Atsinanana. Chaque année, des artistes locaux et nationaux se réunissent pour partager leur passion et faire découvrir les traditions malgaches aux visiteurs du monde entier. Des percussions traditionnelles aux instruments modernes, la musique est au cœur de cette célébration culturelle. Les danseurs en costumes traditionnels racontent l'histoire de Madagascar à travers leurs mouvements gracieux et énergiques."
   },
@@ -17,7 +17,7 @@ const discoverCards = [
     id: 2,
     title: "Reboisement & Environnement",
     subtitle: "Protéger notre île",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800",
+    image: "/image/reboisement.png",
     description: "Le MAKUA Festival s'engage pour l'environnement. Une partie des bénéfices est reversée à des actions de reboisement pour protéger les forêts de Madagascar.",
     fullContent: "L'engagement environnemental est au cœur des valeurs du MAKUA Festival. Chaque édition contribue activement à la préservation de l'environnement malgache. Des milliers de plants d'arbres sont distribués et plantés dans la région de Toamasina. Le festival sensibilise également les participants à l'importance de la protection de la biodiversité unique de Madagascar. Des stands éducatifs, des ateliers de sensibilisation et des actions concrètes de nettoyage sont organisés tout au long de l'événement."
   },
@@ -25,7 +25,7 @@ const discoverCards = [
     id: 3,
     title: "Village Artisanal",
     subtitle: "Vita Malagasy",
-    image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800",
+    image: "/image/vilage.jpeg",
     description: "Explorez le village artisanal avec ses stands de produits 'Vita Malagasy' (Made in Madagascar). Découvrez l'artisanat local, les créations uniques et la gastronomie traditionnelle.",
     fullContent: "Le Village Artisanal du MAKUA Festival est une véritable vitrine du savoir-faire malgache. Plus de 50 artisans locaux présentent leurs créations : vannerie, sculpture sur bois, tissage traditionnel, bijoux en pierres semi-précieuses et bien plus encore. C'est l'occasion parfaite de découvrir et d'acheter des produits authentiques 'Vita Malagasy'. Les visiteurs peuvent observer les artisans au travail, apprendre leurs techniques ancestrales et repartir avec des souvenirs uniques. Une partie des ventes soutient directement les communautés locales."
   },
@@ -33,7 +33,7 @@ const discoverCards = [
     id: 4,
     title: "Grand Carnaval",
     subtitle: "Couleurs et traditions",
-    image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800",
+    image: "/image/carnaval.jpeg",
     description: "Assistez au spectaculaire défilé du Grand Carnaval MAKUA. Costumes traditionnels colorés, danses folkloriques et animations de rue créent une atmosphère festive inoubliable.",
     fullContent: "Le Grand Carnaval est le moment le plus spectaculaire du MAKUA Festival. Des centaines de participants défilent dans les rues de Toamasina, vêtus de costumes traditionnels éclatants. Les groupes de danseurs présentent des chorégraphies inspirées des différentes régions de Madagascar. Les rythmes des tambours résonnent dans toute la ville, créant une ambiance électrique. C'est un spectacle haut en couleur qui célèbre la diversité culturelle de l'île. Chaque groupe raconte une histoire à travers sa performance, mêlant tradition et créativité moderne."
   },
@@ -41,7 +41,7 @@ const discoverCards = [
     id: 5,
     title: "Cuisine Locale",
     subtitle: "Saveurs de l'océan Indien",
-    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800",
+    image: "/image/cuisine.jpeg",
     description: "Dégustez les délices de la gastronomie malgache. Des plats traditionnels aux créations modernes, les saveurs de l'océan Indien s'invitent au festival.",
     fullContent: "La cuisine malgache est à l'honneur au MAKUA Festival avec une dizaine de stands gastronomiques. Découvrez le romazava, le ravitoto, le vary amin'anana et bien d'autres spécialités locales préparées par des chefs talentueux. Les fruits de mer frais de Toamasina sont particulièrement mis en avant. Des ateliers culinaires permettent d'apprendre à préparer ces plats traditionnels. Les boissons locales comme le ranon'ampango et les jus de fruits tropicaux fraîchement pressés complètent cette expérience gustative unique."
   },
@@ -49,7 +49,7 @@ const discoverCards = [
     id: 6,
     title: "Histoire du Festival",
     subtitle: "Naissance d'une légende",
-    image: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800",
+    image: "/image/histoire.png",
     description: "Découvrez l'histoire du MAKUA Festival, depuis sa création en 2024 par Shyn et Denise jusqu'à aujourd'hui. Une aventure culturelle qui ne fait que commencer.",
     fullContent: "Le MAKUA Festival est né de la vision de deux artistes passionnés : Shyn et Denise. En 2024, ils ont organisé la première édition avec un objectif simple : célébrer la culture malgache et promouvoir la scène musicale de l'Est. Le festival tire son nom de l'identité 'Makua' chère à la région de Toamasina. Dès la première édition, plus de 30 artistes se sont produits sur scène devant des milliers de spectateurs. Le succès a été immédiat, transformant cet événement en rendez-vous annuel incontournable. En partenariat avec la Commune Urbaine de Toamasina, le festival continue de grandir tout en restant fidèle à ses valeurs : culture, partage et authenticité."
   }

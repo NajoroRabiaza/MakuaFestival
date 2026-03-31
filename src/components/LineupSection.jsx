@@ -9,7 +9,7 @@ const artists = [
   {
     id: 1,
     name: "SHYN",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500",
+    image: "/image/shyn.jpeg",
     bio: "Figure emblématique de la scène musicale malgache, Shyn est un artiste polyvalent qui a révolutionné le paysage musical de Madagascar. Co-fondateur du MAKUA Festival, il incarne la fusion entre tradition et modernité.",
     stage: "Main Stage",
     time: "22:00 - 23:30",
@@ -23,7 +23,7 @@ const artists = [
   {
     id: 2,
     name: "DENISE",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500",
+    image: "/image/denise.jpeg",
     bio: "Denise est une artiste incontournable de la scène malgache. Co-fondatrice du MAKUA Festival aux côtés de Shyn, elle apporte une touche unique avec sa voix puissante et son énergie scénique incomparable.",
     stage: "Main Stage",
     time: "20:30 - 21:45",
@@ -37,7 +37,7 @@ const artists = [
   {
     id: 3,
     name: "BASTA LION",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500",
+    image: "/image/basta.jpeg",
     bio: "Basta Lion est l'un des rappeurs les plus influents de Madagascar. Avec son flow unique et ses textes percutants, il a conquis le cœur du public malgache et africain.",
     stage: "Main Stage",
     time: "19:00 - 20:15",
@@ -51,7 +51,7 @@ const artists = [
   {
     id: 4,
     name: "LJO",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500",
+    image: "/image/LJO.png",
     bio: "LJO apporte une fraîcheur nouvelle à la scène musicale malgache avec son style unique mêlant hip-hop, R&B et sonorités traditionnelles. Un artiste prometteur à suivre de près.",
     stage: "Second Stage",
     time: "18:00 - 19:00",
@@ -65,7 +65,7 @@ const artists = [
   {
     id: 5,
     name: "CEASAR",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500",
+    image: "/image/ceasar.jpeg",
     bio: "Ceasar est un artiste complet qui maîtrise plusieurs styles musicaux. Du rap au dancehall en passant par l'afrobeat, il sait captiver son public avec des performances énergiques.",
     stage: "Main Stage",
     time: "17:00 - 18:15",
@@ -79,7 +79,7 @@ const artists = [
   {
     id: 6,
     name: "JOYCE MENA",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500",
+    image: "/image/joyce_mena.jpeg",
     bio: "Joyce Mena est une chanteuse talentueuse qui charme le public avec sa voix suave et ses mélodies envoûtantes. Elle représente la nouvelle génération d'artistes féminines malgaches.",
     stage: "Second Stage",
     time: "16:00 - 17:00",
@@ -93,7 +93,7 @@ const artists = [
   {
     id: 7,
     name: "BLACK NADIA",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500",
+    image: "/image/black_nadia.png",
     bio: "Black Nadia est une icône de la musique urbaine malgache. Avec son style affirmé et ses textes engagés, elle inspire toute une génération de jeunes artistes.",
     stage: "Main Stage",
     time: "21:00 - 22:00",
@@ -107,7 +107,7 @@ const artists = [
   {
     id: 8,
     name: "WADA & YOUNGS",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500",
+    image: "/image/wada_yoongs.jpeg",
     bio: "Le duo Wada & Youngs apporte une énergie explosive à la scène malgache. Leur complémentarité parfaite crée des performances mémorables qui font vibrer le public.",
     stage: "Second Stage",
     time: "19:30 - 20:30",
