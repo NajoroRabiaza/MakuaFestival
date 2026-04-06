@@ -4,7 +4,7 @@ export const FESTIVAL_CONFIG = {
   dates: {
     start: '29 Octobre',
     end: '1 Novembre 2026',
-    target: new Date('2026-10-29T00:00:00').getTime() // Fixed: October 29, 2026
+    target: new Date('2026-10-29T00:00:00').getTime()
   },
   location: {
     city: 'Toamasina',
@@ -19,9 +19,9 @@ export const FESTIVAL_CONFIG = {
   description: 'Festival culturel et musical malgache - Musique, danse, traditions locales, artisanat et carnaval'
 };
 
-// Video configuration
+// ✅ Video hébergée sur Cloudinary
 export const VIDEO_CONFIG = {
-  src: '/MAKUA_FESTIVAL.mp4',
+  src: 'https://res.cloudinary.com/dvmuwvc4l/video/upload/v1775510481/MAKUA_FESTIVAL_jsq9fi.mp4',
   poster: '/MAKUA_FESTIVAL_poster.jpg',
   type: 'video/mp4'
 };
