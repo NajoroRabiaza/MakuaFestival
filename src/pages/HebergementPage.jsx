@@ -217,10 +217,22 @@ const HebergementPage = () => {
     },
   ];
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+  
+    window.addEventListener('resize', handleResize);
+  
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const currentHotel = hotels[currentHotelIndex];
   const maxHotelIndex = hotels.length - 1;
   const cardsPerView = 3;
-  const maxVillaIndex = villas.length - cardsPerView;
+  const maxVillaIndex = isMobile ? villas.length - 1 : villas.length - cardsPerView;
 
   useEffect(() => {
     setAnimationKey((prev) => prev + 1);
@@ -348,10 +360,35 @@ const HebergementPage = () => {
           <p className="text-lg text-white/60">Vivez une expérience authentique et culturelle</p>
         </div>
         <div className="relative max-w-7xl mx-auto mb-12">
-          <div ref={carouselRef} className="overflow-visible px-4 cursor-grab active:cursor-grabbing" onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} onWheel={handleWheel}>
-            <div className="flex gap-6" style={{ transform: `translateX(calc(-${currentVillaIndex * (100 / cardsPerView)}% + ${translateX}px))`, transition: isDragging ? 'none' : 'transform 0.5s ease-out' }}>
+          <div
+            ref={carouselRef}
+            className="overflow-hidden px-4 cursor-grab active:cursor-grabbing"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onWheel={handleWheel}
+          >
+            <div
+              className={isMobile ? 'flex' : 'flex gap-6'}
+              style={{
+                transform: isMobile
+                  ? `translateX(calc(-${currentVillaIndex * 100}% + ${translateX}px))`
+                  : `translateX(calc(-${currentVillaIndex * (100 / cardsPerView + 2)}% + ${translateX}px))`,
+                transition: isDragging ? 'none' : 'transform 0.5s ease-out'
+              }}
+            >
               {villas.map((villa) => (
-                <div key={villa.id} className="flex-shrink-0 w-full md:w-[calc(33.333%-16px)] p-2" onMouseEnter={() => setHoveredVilla(villa.id)} onMouseLeave={() => setHoveredVilla(null)}>
+                <div
+                  key={villa.id}
+                  className="flex-shrink-0 p-2"
+                  style={{ width: isMobile ? '100%' : 'calc(33.333% - 16px)' }}
+                  onMouseEnter={() => setHoveredVilla(villa.id)}
+                  onMouseLeave={() => setHoveredVilla(null)}
+                >
                   <div className="relative">
                     <div className={`absolute -inset-1.5 rounded-3xl transition-all duration-700 ${hoveredVilla === villa.id ? 'opacity-100' : 'opacity-0'}`} style={{ background: 'linear-gradient(135deg, rgba(255,80,40,0.35), rgba(255,140,50,0.25), rgba(255,80,40,0.35))', filter: 'blur(8px)', zIndex: 0 }} />
                     <div className="relative group cursor-pointer h-[400px] rounded-3xl overflow-hidden z-10">
