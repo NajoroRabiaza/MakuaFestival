@@ -79,7 +79,7 @@ const Footer = () => {
       {/* Bottom Section - Copyright */}
       <div className="border-t border-white/10 pt-8">
         <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-white/60">
-          <p>©2026 MAKUA FESTIVAL</p>
+          <p>©2026 MAKUA FESTIVAL By NajoroRabiaza</p>
           <span className="hidden md:inline">•</span>
           <a href="#terms" className="hover:text-white transition-colors">
             CONDITIONS D'UTILISATION
