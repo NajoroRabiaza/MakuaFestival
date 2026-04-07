@@ -63,30 +63,24 @@ const DiscoverSection = () => {
   const [startX, setStartX] = useState(0);
   const [translateX, setTranslateX] = useState(0);
   const [isClosing, setIsClosing] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const carouselRef = useRef(null);
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease-out',
-    });
+    AOS.init({ duration: 1000, once: true, easing: 'ease-out' });
   }, []);
 
-  const cardsPerView = 3;
-  const maxIndex = discoverCards.length - cardsPerView;
+  // Détecter mobile/desktop
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-  const handleWheel = (e) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault();
-      
-      if (e.deltaX > 30) {
-        nextSlide();
-      } else if (e.deltaX < -30) {
-        prevSlide();
-      }
-    }
-  };
+  // Sur mobile : 1 carte à la fois, sur desktop : 3
+  const cardsPerView = isMobile ? 1 : 3;
+  const maxIndex = discoverCards.length - cardsPerView;
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
@@ -94,6 +88,14 @@ const DiscoverSection = () => {
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
+  const handleWheel = (e) => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.preventDefault();
+      if (e.deltaX > 30) nextSlide();
+      else if (e.deltaX < -30) prevSlide();
+    }
   };
 
   const openModal = (card) => {
@@ -121,19 +123,14 @@ const DiscoverSection = () => {
     if (!isDragging) return;
     e.preventDefault();
     const x = e.pageX - carouselRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    setTranslateX(walk);
+    setTranslateX((x - startX) * 1.5);
   };
 
   const handleMouseUp = () => {
     if (!isDragging) return;
     setIsDragging(false);
-    
-    if (translateX > 100) {
-      prevSlide();
-    } else if (translateX < -100) {
-      nextSlide();
-    }
+    if (translateX > 100) prevSlide();
+    else if (translateX < -100) nextSlide();
     setTranslateX(0);
   };
 
@@ -142,18 +139,17 @@ const DiscoverSection = () => {
   };
 
   const handleTouchMove = (e) => {
-    const walk = e.touches[0].clientX - startX;
-    setTranslateX(walk);
+    setTranslateX(e.touches[0].clientX - startX);
   };
 
   const handleTouchEnd = () => {
-    if (translateX > 100) {
-      prevSlide();
-    } else if (translateX < -100) {
-      nextSlide();
-    }
+    if (translateX > 50) prevSlide();
+    else if (translateX < -50) nextSlide();
     setTranslateX(0);
   };
+
+  // Largeur d'une carte selon le breakpoint
+  const cardWidthPercent = isMobile ? 100 : 100 / cardsPerView;
 
   return (
     <section id="discover" className="relative bg-black py-20 px-6 overflow-hidden" data-aos="fade-up" data-aos-delay="800">
@@ -169,10 +165,9 @@ const DiscoverSection = () => {
 
       {/* Carousel Container */}
       <div className="relative max-w-7xl mx-auto mb-12">
-        {/* Cards Grid */}
-        <div 
+        <div
           ref={carouselRef}
-          className="overflow-visible px-4 cursor-grab active:cursor-grabbing"
+          className="overflow-hidden px-4 cursor-grab active:cursor-grabbing"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -182,51 +177,55 @@ const DiscoverSection = () => {
           onTouchEnd={handleTouchEnd}
           onWheel={handleWheel}
         >
-          <div 
-            className="flex transition-transform duration-500 ease-out gap-6"
-            style={{ 
-              transform: `translateX(calc(-${currentIndex * (100 / cardsPerView)}% + ${translateX}px))`,
-              transition: isDragging ? 'none' : 'transform 0.5s ease-out'
+          <div
+            className={isMobile ? 'flex' : 'flex gap-6'}
+            style={{
+              transform: isMobile
+                ? `translateX(calc(-${currentIndex * 100}% + ${translateX}px))`
+                : `translateX(calc(-${currentIndex * (100 / 3 + 2)}% + ${translateX}px))`,
+              transition: isDragging ? 'none' : 'transform 0.5s ease-out',
             }}
           >
             {discoverCards.map((card) => (
               <div
                 key={card.id}
-                className="flex-shrink-0 w-full md:w-[calc(33.333%-16px)] p-2"
+                className="flex-shrink-0 p-2"
+                style={{ width: isMobile ? '100%' : 'calc(33.333% - 16px)' }}
                 onMouseEnter={() => setHoveredCard(card.id)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 <div className="relative">
-                  <div 
+                  <div
                     className={`absolute -inset-1.5 rounded-3xl transition-all duration-700 ${
                       hoveredCard === card.id ? 'opacity-100' : 'opacity-0'
                     }`}
                     style={{
                       background: 'linear-gradient(135deg, rgba(255, 80, 40, 0.35), rgba(255, 140, 50, 0.25), rgba(255, 80, 40, 0.35))',
                       filter: 'blur(8px)',
-                      zIndex: 0
+                      zIndex: 0,
                     }}
                   />
-                  
+
                   <div className="relative group cursor-pointer h-[400px] rounded-3xl overflow-hidden z-10">
-                    <img 
-                      src={card.image} 
+                    <img
+                      src={card.image}
                       alt={card.title}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       draggable="false"
                     />
-                    
+
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                    
-                    <div 
+
+                    <div
                       className="absolute inset-0 rounded-3xl transition-all duration-700 pointer-events-none"
                       style={{
-                        boxShadow: hoveredCard === card.id 
-                          ? '0 0 0 1.5px rgba(200, 200, 200, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.12)' 
-                          : 'none'
+                        boxShadow:
+                          hoveredCard === card.id
+                            ? '0 0 0 1.5px rgba(200, 200, 200, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.12)'
+                            : 'none',
                       }}
                     />
-                    
+
                     <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                       <h3 className="text-2xl font-bold text-white mb-2 leading-tight">
                         {card.title}
@@ -236,10 +235,10 @@ const DiscoverSection = () => {
                       </p>
                     </div>
 
-                    <div 
+                    <div
                       className={`absolute bottom-0 left-0 right-0 flex justify-center pb-6 transition-all duration-500 z-20 ${
-                        hoveredCard === card.id 
-                          ? 'opacity-100 translate-y-0' 
+                        hoveredCard === card.id
+                          ? 'opacity-100 translate-y-0'
                           : 'opacity-0 translate-y-8 pointer-events-none'
                       }`}
                     >
@@ -269,7 +268,7 @@ const DiscoverSection = () => {
         </button>
 
         <div className="flex-1 h-0.5 bg-white/20 rounded-full overflow-hidden">
-          <div 
+          <div
             className="h-full bg-white transition-all duration-500"
             style={{ width: `${((currentIndex + 1) / (maxIndex + 1)) * 100}%` }}
           />
@@ -284,97 +283,71 @@ const DiscoverSection = () => {
         </button>
       </div>
 
-      {/* Modal avec createPortal */}
-      {selectedCard && createPortal(
-        <div 
-          className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 ${
-            isClosing ? 'animate-modal-backdrop-out' : 'animate-modal-backdrop'
-          }`}
-          onClick={closeModal}
-        >
-          <div className="absolute inset-0 bg-black/60" />
-          
-          <div 
-            className={`relative bg-gradient-to-br from-gray-900 to-black border border-white/20 rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-hidden shadow-2xl ${
-              isClosing ? 'animate-modal-content-out' : 'animate-modal-content'
+      {/* Modal */}
+      {selectedCard &&
+        createPortal(
+          <div
+            className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 ${
+              isClosing ? 'animate-modal-backdrop-out' : 'animate-modal-backdrop'
             }`}
-            onClick={(e) => e.stopPropagation()}
+            onClick={closeModal}
           >
-            <button
-              onClick={closeModal}
-              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all z-10 border border-white/20"
-              aria-label="Close modal"
+            <div className="absolute inset-0 bg-black/60" />
+
+            <div
+              className={`relative bg-gradient-to-br from-gray-900 to-black border border-white/20 rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-hidden shadow-2xl ${
+                isClosing ? 'animate-modal-content-out' : 'animate-modal-content'
+              }`}
+              onClick={(e) => e.stopPropagation()}
             >
-              <X className="w-5 h-5 text-white" />
-            </button>
+              <button
+                onClick={closeModal}
+                className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all z-10 border border-white/20"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5 text-white" />
+              </button>
 
-            <div className="relative h-72 overflow-hidden">
-              <img 
-                src={selectedCard.image} 
-                alt={selectedCard.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+              <div className="relative h-72 overflow-hidden">
+                <img
+                  src={selectedCard.image}
+                  alt={selectedCard.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+              </div>
+
+              <div className="p-8 md:p-10 overflow-y-auto max-h-[calc(85vh-288px)]">
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                  {selectedCard.title}
+                </h3>
+                <p className="text-orange-400 text-lg mb-6 font-medium">
+                  {selectedCard.subtitle}
+                </p>
+                <p className="text-white/90 text-lg leading-relaxed">
+                  {selectedCard.fullContent}
+                </p>
+              </div>
             </div>
+          </div>,
+          document.body
+        )}
 
-            <div className="p-8 md:p-10 overflow-y-auto max-h-[calc(85vh-288px)]">
-              <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                {selectedCard.title}
-              </h3>
-              <p className="text-orange-400 text-lg mb-6 font-medium">
-                {selectedCard.subtitle}
-              </p>
-              <p className="text-white/90 text-lg leading-relaxed">
-                {selectedCard.fullContent}
-              </p>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
-
-      {/* Animations CSS */}
       <style jsx>{`
-        @keyframes modal-backdrop-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes modal-backdrop-out {
-          from { opacity: 1; }
-          to { opacity: 0; }
-        }
+        @keyframes modal-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modal-backdrop-out { from { opacity: 1; } to { opacity: 0; } }
         @keyframes modal-content-in {
-          from {
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
+          from { opacity: 0; transform: scale(0.95) translateY(20px); }
+          to { opacity: 1; transform: scale(1) translateY(0); }
         }
         @keyframes modal-content-out {
-          from {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-          to {
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-          }
+          from { opacity: 1; transform: scale(1) translateY(0); }
+          to { opacity: 0; transform: scale(0.95) translateY(20px); }
         }
-        .animate-modal-backdrop {
-          animation: modal-backdrop-in 0.3s ease-out;
-        }
-        .animate-modal-backdrop-out {
-          animation: modal-backdrop-out 0.3s ease-out;
-        }
-        .animate-modal-content {
-          animation: modal-content-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .animate-modal-content-out {
-          animation: modal-content-out 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .animate-modal-backdrop { animation: modal-backdrop-in 0.3s ease-out; }
+        .animate-modal-backdrop-out { animation: modal-backdrop-out 0.3s ease-out; }
+        .animate-modal-content { animation: modal-content-in 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .animate-modal-content-out { animation: modal-content-out 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
       `}</style>
     </section>
   );
