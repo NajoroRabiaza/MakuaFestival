@@ -17,16 +17,16 @@ const MainContent = ({ timeLeft }) => {
       </div>
 
       {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 m-10 w-full max-w-md animate-slide-up">
-        <Link to="/billetterie" className="w-full">
-          <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 text-white font-bold text-lg uppercase tracking-wide hover:scale-105 transition-transform shadow-2xl shadow-orange-400/40">
+      {/* CTA Buttons */}
+      <div className="flex flex-col sm:flex-row items-center gap-3 mt-8 mb-6 animate-slide-up">
+        <Link to="/billetterie">
+          <button className="px-6 py-3 rounded-full bg-gradient-to-r from-cyan-400 to-indigo-600 text-white font-bold text-xs sm:text-base uppercase tracking-wider hover:scale-105 transition-transform shadow-2xl shadow-orange-400/40 whitespace-nowrap">
             Get Your Tickets
           </button>
         </Link>
-        
-        {/* AJOUT DU LINK ICI */}
-        <Link to="/hebergement" className="w-full">
-          <button className="w-full px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-bold text-lg uppercase tracking-wide hover:bg-white hover:text-black transition-all">
+
+        <Link to="/hebergement">
+          <button className="px-6 py-3 rounded-full bg-transparent border-2 border-white text-white font-bold text-xs sm:text-base uppercase tracking-wider hover:bg-white hover:text-black transition-all whitespace-nowrap">
             Get Your Accommodation
           </button>
         </Link>
