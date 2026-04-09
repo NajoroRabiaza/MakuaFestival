@@ -3,6 +3,16 @@ import { Facebook, Instagram, Youtube, Music } from 'lucide-react';
 import makuaLogo from '../assets/makua-logo.jpeg';
 
 const Footer = () => {
+  // Liste de tes sponsors
+  const sponsors = [
+    { name: 'Canal+', src: '/image/canal+.png' },
+    { name: 'CFAO Mobility', src: '/image/cfao.jpeg' },
+    { name: 'Nova Terre', src: '/image/novaterre.png' },
+    { name: 'SOATRANS Plus', src: '/image/soatrans.png' },
+    { name: 'World Cola', src: '/image/word_cola.png' },
+    { name: 'Yas', src: '/image/yas.svg' }
+  ];
+
   return (
     <footer className="relative bg-black text-white py-16 px-6 md:px-12">
       {/* Logo */}
@@ -54,25 +64,24 @@ const Footer = () => {
         </a>
       </div>
 
-      {/* Sponsors Section - Placeholder */}
+      {/* Sponsors Section */}
       <div className="border-t border-white/10 pt-12 mb-12">
         <h3 className="text-center text-sm uppercase tracking-wider text-white/60 mb-8">
           Nos Partenaires
         </h3>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-          {/* Placeholder pour les logos sponsors - À remplacer plus tard */}
-          <div className="w-32 h-16 bg-white/5 rounded flex items-center justify-center text-white/40 text-xs">
-            Sponsor 1
-          </div>
-          <div className="w-32 h-16 bg-white/5 rounded flex items-center justify-center text-white/40 text-xs">
-            Sponsor 2
-          </div>
-          <div className="w-32 h-16 bg-white/5 rounded flex items-center justify-center text-white/40 text-xs">
-            Sponsor 3
-          </div>
-          <div className="w-32 h-16 bg-white/5 rounded flex items-center justify-center text-white/40 text-xs">
-            Sponsor 4
-          </div>
+        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+          {sponsors.map((sponsor, index) => (
+            <div 
+              key={index} 
+              className="w-32 h-16 bg-white rounded-md flex items-center justify-center p-2 hover:scale-105 transition-transform duration-300"
+            >
+              <img 
+                src={sponsor.src} 
+                alt={`Logo ${sponsor.name}`} 
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+          ))}
         </div>
       </div>
 
