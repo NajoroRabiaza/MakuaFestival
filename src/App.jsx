@@ -5,19 +5,22 @@ import BilletteriePage from './pages/BilletteriePage';
 import HebergementPage from './pages/HebergementPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ScrollToTop from './components/ScrollToTop';
+import { LineupProvider } from './contexts/LineupContext';
 import './styles/App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/billetterie" element={<BilletteriePage />} />
-        <Route path="/hebergement" element={<HebergementPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <LineupProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/billetterie" element={<BilletteriePage />} />
+          <Route path="/hebergement" element={<HebergementPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </LineupProvider>
   );
 }
 
