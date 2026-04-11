@@ -289,13 +289,13 @@ const LineupSection = () => {
                 </div>
 
 
-                /**
+                {/**
                 * Le bouton est maintenant toggle : si l'artiste est déjà dans le lineup
                 * il affiche ✓ "Added to My Lineup" en orange, hover passe en rouge pour signaler qu'on peut retirer
                 * Animation scale-105 pendant 1.5s au moment de l'ajout
                 * Le justAdded se remet à zéro à chaque ouverture de modal
                 *
-                 */
+                  */}
                 <button
                   onClick={() => {
                     const alreadyIn = isInLineup(selectedArtist.id);

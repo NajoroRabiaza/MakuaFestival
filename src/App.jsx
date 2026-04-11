@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import BilletteriePage from './pages/BilletteriePage';
 import HebergementPage from './pages/HebergementPage';
 import NotFoundPage from './pages/NotFoundPage';
+import MyLineupPage from './pages/MyLineupPage';
 import ScrollToTop from './components/ScrollToTop';
 import { LineupProvider } from './contexts/LineupContext';
 import './styles/App.css';
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/billetterie" element={<BilletteriePage />} />
           <Route path="/hebergement" element={<HebergementPage />} />
+          <Route path="/my-lineup" element={<MyLineupPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

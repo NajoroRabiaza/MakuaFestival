@@ -163,8 +163,12 @@ const Header = () => {
 
         {/* Right Side */}
         <div className="flex items-center gap-2 md:gap-4 z-10">
-          {/* Shopping Bag */}
-          <button className="relative w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all">
+          {/* Shopping Bag — navigate to My Lineup */}
+          <button
+            onClick={() => navigate('/my-lineup')}
+            aria-label="My Lineup"
+            className="relative w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all"
+          >
             <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 text-white" />
             {myLineup.length > 0 && (
               <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-orange-500 text-white text-[10px] font-bold flex items-center justify-center leading-none shadow-lg shadow-orange-500/40 animate-badge-pop">
