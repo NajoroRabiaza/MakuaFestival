@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, ShoppingBag, ChevronDown, ChevronUp, X } from 'lucide-react';
 import { FESTIVAL_CONFIG } from '../utils/constants';
 import makuaLogo from '../assets/makua-logo.jpeg';
+import { useLineup } from '../contexts/LineupContext';
 
 const menuItems = [
   {
@@ -27,6 +28,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { myLineup } = useLineup();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -162,8 +164,13 @@ const Header = () => {
         {/* Right Side */}
         <div className="flex items-center gap-2 md:gap-4 z-10">
           {/* Shopping Bag */}
-          <button className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all">
+          <button className="relative w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all">
             <ShoppingBag className="w-4 h-4 md:w-5 md:h-5 text-white" />
+            {myLineup.length > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-orange-500 text-white text-[10px] font-bold flex items-center justify-center leading-none shadow-lg shadow-orange-500/40 animate-badge-pop">
+                {myLineup.length}
+              </span>
+            )}
           </button>
 
           {/* Sign Up — desktop only */}
@@ -245,6 +252,12 @@ const Header = () => {
       )}
 
       <style jsx>{`
+        @keyframes badge-pop {
+          0% { transform: scale(0); opacity: 0; }
+          70% { transform: scale(1.2); opacity: 1; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-badge-pop { animation: badge-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes menu-fade-in {
           from { opacity: 0; transform: translateX(-50%) translateY(-5px); }
           to { opacity: 1; transform: translateX(-50%) translateY(0); }
