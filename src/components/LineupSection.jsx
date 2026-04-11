@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Instagram, Music2, Youtube } from 'lucide-react';
+import { X, Instagram, Music2, Youtube, Check, Plus } from 'lucide-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import makuaLogo from '../assets/makua-logo.jpeg';
+import { useLineup } from '../contexts/LineupContext';
 
 const artists = [
   {
@@ -124,6 +125,9 @@ const LineupSection = () => {
   const [selectedArtist, setSelectedArtist] = useState(null);
   const [isClosing, setIsClosing] = useState(false);
   const [showAll, setShowAll] = useState(false);
+  // justAdded state pour l'animation de feedback
+  const [justAdded, setJustAdded] = useState(false);
+  const { toggleArtist, isInLineup } = useLineup();
 
   useEffect(() => {
     AOS.init({
@@ -136,6 +140,7 @@ const LineupSection = () => {
   const openArtistModal = (artist) => {
     setSelectedArtist(artist);
     setIsClosing(false);
+    setJustAdded(false);
     document.body.style.overflow = 'hidden';
   };
 
@@ -283,9 +288,40 @@ const LineupSection = () => {
                   </div>
                 </div>
 
-                <button className="mt-6 px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-medium rounded-full transition-all duration-300 flex items-center gap-2">
-                  <span>Add to My Lineup</span>
-                  <span className="text-xl">+</span>
+
+                /**
+                * Le bouton est maintenant toggle : si l'artiste est déjà dans le lineup
+                * il affiche ✓ "Added to My Lineup" en orange, hover passe en rouge pour signaler qu'on peut retirer
+                * Animation scale-105 pendant 1.5s au moment de l'ajout
+                * Le justAdded se remet à zéro à chaque ouverture de modal
+                *
+                 */
+                <button
+                  onClick={() => {
+                    const alreadyIn = isInLineup(selectedArtist.id);
+                    toggleArtist(selectedArtist);
+                    if (!alreadyIn) {
+                      setJustAdded(true);
+                      setTimeout(() => setJustAdded(false), 1500);
+                    }
+                  }}
+                  className={`mt-6 px-8 py-3 border font-medium rounded-full transition-all duration-300 flex items-center gap-2 ${
+                    isInLineup(selectedArtist.id)
+                      ? 'bg-orange-500/20 border-orange-500 text-orange-400 hover:bg-red-500/20 hover:border-red-400 hover:text-red-400'
+                      : 'bg-white/10 hover:bg-white/20 border-white/30 text-white'
+                  } ${justAdded ? 'scale-105' : 'scale-100'}`}
+                >
+                  {isInLineup(selectedArtist.id) ? (
+                    <>
+                      <Check className="w-4 h-4" />
+                      <span>Added to My Lineup</span>
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4" />
+                      <span>Add to My Lineup</span>
+                    </>
+                  )}
                 </button>
               </div>
 
