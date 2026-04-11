@@ -69,16 +69,17 @@ const Footer = () => {
         <h3 className="text-center text-sm uppercase tracking-wider text-white/60 mb-8">
           Nos Partenaires
         </h3>
-        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
           {sponsors.map((sponsor, index) => (
             <div 
               key={index} 
-              className="w-32 h-16 bg-white rounded-md flex items-center justify-center p-2 hover:scale-105 transition-transform duration-300"
+              className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
             >
               <img 
                 src={sponsor.src} 
                 alt={`Logo ${sponsor.name}`} 
-                className="max-h-full max-w-full object-contain"
+                // h-12 sur mobile, h-16 sur PC pour les agrandir. w-auto garde les proportions.
+                className="h-12 md:h-16 w-auto object-contain" 
               />
             </div>
           ))}
